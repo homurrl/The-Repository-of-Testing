@@ -8,7 +8,7 @@ const cities = JSON.parse(localStorage.getItem('cities')) ?? [];
   for(let i = 0; i < cities.length; i++){
     const li = document.createElement('li');
     li.setAttribute('id', `${cities[i]}`);
-    li.setAttribute('style', "padding-block: 10px; cursor: pointer");
+    li.setAttribute('style', "padding-block: 10px; ");
     li.innerHTML = cities[i];
     ul.appendChild(li);
     document.getElementById(`${cities[i]}`).addEventListener('click', async () => {
