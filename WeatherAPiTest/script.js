@@ -1,5 +1,23 @@
 const API_KEY = "587f406eaa0d80708dc2e96c4473faa2";
 
+const cities = JSON.parse(localStorage.getItem('cities')) ?? [];
+
+
+ if(cities){
+  const ul = document.querySelector('ul');
+  for(let i = 0; i < cities.length; i++){
+    const li = document.createElement('li');
+    li.setAttribute('id', `${cities[i]}`);
+    li.setAttribute('style', "padding-block: 10px; cursor: pointer");
+    li.innerHTML = cities[i];
+    ul.appendChild(li);
+    document.getElementById(`${cities[i]}`).addEventListener('click', async () => {
+      const weatherData = await fetchWeather(document.getElementById(`${cities[i]}`).textContent);
+      displayCity(weatherData);
+    })
+  }
+}
+
 async function fetchWeather(city) {
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`;
   const response = await fetch(url);
@@ -21,7 +39,19 @@ async function main() {
   searchButton.addEventListener("click", async () => {
     const city = searchInput.value;
     const weatherData = await fetchWeather(city);
+    cities.push(weatherData.name);
 
+    // set cities to local storage
+    localStorage.setItem('cities', JSON.stringify(cities));
+
+    console.log(cities);
+
+    displayCity(weatherData);
+
+  });
+};
+
+function displayCity(weatherData) {
     // Display the city name
     document.getElementById("city-name").innerHTML = `<h2>${weatherData.name}</h2>`;
 
@@ -34,10 +64,7 @@ async function main() {
     // Display the current temperature
     const celsius = (weatherData.main.temp - 273.15);
     document.getElementById("current-temperature").innerHTML = `<p>Current temperature: ${celsius}°C</p>`;
-  });
-};
-
-
+}
 
 main();
 
