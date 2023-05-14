@@ -1,0 +1,3 @@
+This is a simple weather generator that uses OpenWeather to render humidity, wind speed, and current temperature in the city entered into the search bar. It also stores previous searches in local storage and renders them to the front end when the user refreshes the page. The previous searches are clickable, which will bring up current weather conditions for that city.
+
+To use the weather generator, simply enter a city name into the search bar and press search. The weather conditions for that city will be displayed below the search bar. 
