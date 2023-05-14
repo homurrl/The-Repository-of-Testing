@@ -66,5 +66,8 @@ function displayCity(weatherData) {
     document.getElementById("current-temperature").innerHTML = `<p>Current temperature: ${celsius}°C</p>`;
 }
 
+
+
+
 main();
 
